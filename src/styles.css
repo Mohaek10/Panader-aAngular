@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "miFuente";
+  src: url(assets/font/Macondo-Regular.ttf);
+}
+
+body {
+  background-image: url(assets/img/PANADERIA-MOVIL.jpg);
+  background-size: cover;
+}
+header{
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.caja {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.estiloText {
+  font-family: "miFuente";
+  font-weight: bold;
+  color: black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid black;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid black;
+}

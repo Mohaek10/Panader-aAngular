@@ -1,1 +1,61 @@
-<p>furmulario works!</p>
+<header class="container-fluid text-black p-3 text-center">
+  <h1 class="display-3">Panadería Leganés</h1>
+</header>
+<div class="container mt-5 caja">
+  <form id="orderForm" (submit)="generarTabla($event)">
+    <div class="d-flex justify-content-between align-items-center form-row ">
+
+      <div class="form-group col-md-4">
+        <label for="selectProducto">Producto</label>
+        <select class="form-control" id="selectProducto"  [ngModel]="productoSeleccionado()" (ngModelChange)="productoNuevo($event)" [ngModelOptions]="{standalone: true}" >
+          @for (producto of productos; track producto.nombre) {
+            <option value="{{producto.id}}">{{ producto.nombre }} </option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="precioInput">Precio</label>
+        <input type="text" name="precio" class="form-control" id="precioInput" [ngModel]="precioProducto()" readonly>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="cantidadInput">Cantidad</label>
+        <input type="number" class="form-control" id="cantidadInput" name="cantidad" placeholder="1" [ngModel]="cantidad" (ngModelChange)="cantidadNueva($event)" >
+      </div>
+      <div class="form-group col-md-3">
+        <label for="subtotalInput">Subtotal</label>
+        <input type="text" class="form-control" id="subtotalInput" [ngModel]="precioTotal()" (ngModelChange)="precioTotal()"  name="total" readonly>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!validarFormulario()" id="addButton">Añadir</button>
+
+  </form>
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Subtotal</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody id="pedidosTabla">
+      @for (pedido of productosEnCarrito; track pedido.id ) {
+        <tr>
+          <td>{{ pedido.nombre }}</td>
+          <td>{{ pedido.precio }}</td>
+          <td>{{ pedido.cantidad }}</td>
+          <td>{{ pedido.precioTotal }}</td>
+          <td><button type="button" class="btn btn-danger" (click)="eliminarProducto(pedido.id)">Eliminar</button></td>
+        </tr>
+      }
+
+    </tbody>
+  </table>
+  <div class="alert alert-info mt-3" id="totalAlert" style="display:none;">
+    Total: <span id="cuentaTotal">$0</span>
+  </div>
+  <button type="button" class="btn btn-success mt-3" (click)="imprimirTicket()"   id="printButton">Imprimir Ticket</button>
+</div>
